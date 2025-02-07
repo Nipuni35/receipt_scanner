@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CameraModule extends StatefulWidget {
@@ -41,8 +40,7 @@ class CameraModuleState extends State<CameraModule> {
       await _initializeControllerFuture;
       final XFile image = await _controller.takePicture();
       await [Permission.storage, Permission.photos].request();
-      final result = await ImageGallerySaver.saveFile(image.path);
-      print("Saved to Gallery: $result");
+
       setState(() {
         _capturedImagePath = image.path;
       });
